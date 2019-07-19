@@ -25,9 +25,6 @@ import com.jeongwoochang.sunrinhackathon5th.API.APIInterface
 import com.jeongwoochang.sunrinhackathon5th.R
 import com.jeongwoochang.sunrinhackathon5th.data.ResBody
 import com.jeongwoochang.sunrinhackathon5th.util.SharedPreferencesHelper
-import com.mikhaellopez.rxanimation.RxAnimation
-import com.mikhaellopez.rxanimation.fadeIn
-import com.mikhaellopez.rxanimation.resize
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback

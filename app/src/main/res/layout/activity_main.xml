@@ -1,71 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		android:layout_width="match_parent" android:layout_height="match_parent"
-		android:background="@drawable/main_background"
-		android:orientation="vertical">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:background="@drawable/main_background"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-	<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="150dp"
-			android:layout_marginLeft="30dp"
-			android:layout_marginRight="30dp"
-			android:padding="30dp"
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:minHeight="80dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="6dp"
+            android:layout_gravity="center_horizontal"
+            android:foreground="?attr/selectableItemBackground">
 
-			android:orientation="horizontal">
+        <TextView
+                android:id="@+id/main_date"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="18dp"
+                android:fontFamily="@font/nanum_square_eb"
+                android:textColor="@color/colorPrimaryGreen"
+                android:gravity="center_vertical"
+                android:text="오늘은"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
 
-		<de.hdodenhof.circleimageview.CircleImageView
-				android:layout_width="80dp"
-				android:layout_height="80dp"
-				android:layout_marginRight="15dp"
-				android:id="@+id/profileImage"
-				android:foreground="?attr/selectableItemBackground"
-				android:layout_centerHorizontal="true"
-				android:src="@drawable/ic_default_profile"
-				android:layout_gravity="center"/>
+    </androidx.cardview.widget.CardView>
 
-		<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent"
-					  android:orientation="vertical">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:padding="30dp"
 
-			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-					  android:text="오늘은 어떤 고민이 있나요?"
-					  android:textSize="12sp"
-					  android:fontFamily="@font/nanum_square_b"
-					  android:textColor="@color/colorPrimaryPink"/>
+            android:orientation="horizontal">
 
-			<View android:layout_width="match_parent" android:layout_height="wrap_content"
-				  android:layout_weight="1"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="15dp"
+                android:id="@+id/profileImage"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_default_profile"
+                android:layout_gravity="center"/>
 
-			<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-						  android:orientation="horizontal">
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+                      android:orientation="vertical">
 
-				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-						  android:text="김나현"
-						  android:fontFamily="@font/nanum_square_eb"
-						  android:textSize="22sp"
-						  android:textColor="@color/colorPrimaryPink"
-						  android:id="@+id/name"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="오늘은 어떤 고민이 있나요?"
+                      android:textSize="12sp"
+                      android:fontFamily="@font/nanum_square_b"
+                      android:textColor="@color/colorPrimaryPink"/>
 
-				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-						  android:text="님"
-						  android:fontFamily="@font/nanum_square_b"
-						  android:textSize="22sp"
-						  android:textColor="@color/colorPrimaryPink"/>
+            <View android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:layout_weight="1"/>
 
-			</LinearLayout>
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:orientation="horizontal">
 
-			<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-					  android:text="Whynxt@naver.com"
-					  android:fontFamily="@font/nanum_square_r"
-					  android:textColor="@color/colorPrimaryPink"
-					  android:id="@+id/email"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="김나현"
+                          android:fontFamily="@font/nanum_square_eb"
+                          android:textSize="22sp"
+                          android:textColor="@color/colorPrimaryPink"
+                          android:id="@+id/name"/>
 
-		</LinearLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="님"
+                          android:fontFamily="@font/nanum_square_b"
+                          android:textSize="22sp"
+                          android:textColor="@color/colorPrimaryPink"/>
 
+            </LinearLayout>
 
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:text="Whynxt@naver.com"
+                      android:fontFamily="@font/nanum_square_r"
+                      android:textColor="@color/colorPrimaryPink"
+                      android:id="@+id/email"/>
 
-	</LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
