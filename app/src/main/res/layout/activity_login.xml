@@ -42,12 +42,12 @@
                 android:layout_width="match_parent"
                 app:cardCornerRadius="20dp"
                 android:layout_margin="7dp"
-                app:cardElevation="10dp"
+                app:cardElevation="8dp"
                 android:layout_height="wrap_content">
 
             <RelativeLayout
                     android:layout_margin="5dp"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_width="match_parent" android:layout_height="35dp"
                     android:padding="8dp">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -65,6 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:fontFamily="@font/nanum_square_r"
+                        android:textSize="12sp"
                         android:background="@null"
                         android:layout_marginLeft="5dp"
                         android:inputType="textEmailAddress"
@@ -78,13 +79,13 @@
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
+                app:cardElevation="8dp"
                 android:layout_margin="7dp"
                 android:layout_height="wrap_content">
 
             <RelativeLayout
                     android:layout_margin="5dp"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_width="match_parent" android:layout_height="35dp"
                     android:padding="8dp">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -110,7 +111,7 @@
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:singleLine="true"
-                android:layout_toRightOf="@id/hintPW"/>
+                        android:layout_toRightOf="@id/hintPW"/>
 
             </RelativeLayout>
 
@@ -130,15 +131,27 @@
                 android:layout_marginTop="40dp"
                 android:text="@string/action_sign_up"/>
 
-        <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:id="@+id/autoLogin"
-                  android:textSize="14sp"
-                  android:layout_gravity="center_horizontal"
-                  android:fontFamily="@font/nanum_square_r"
-                  android:background="@drawable/auto_login_check_box"
-                  android:button="@null"
-                  style="?android:textAppearanceSmall"
-                  android:text="자동 로그인"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:gravity="center_horizontal">
+
+            <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/autoLogin"
+                      android:textSize="14sp"
+                      android:layout_gravity="center_horizontal"
+                      android:fontFamily="@font/nanum_square_r"
+                      android:background="@drawable/auto_login_check_box"
+                      android:button="@null"/>
+
+            <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    style="?android:textAppearanceSmall"
+                    android:text="자동 로그인"
+                    android:layout_gravity="center_vertical"
+            android:paddingBottom="3dp"/>
+
+        </LinearLayout>
+
 
         <androidx.cardview.widget.CardView android:layout_width="60dp"
                                            app:cardCornerRadius="30dp"
