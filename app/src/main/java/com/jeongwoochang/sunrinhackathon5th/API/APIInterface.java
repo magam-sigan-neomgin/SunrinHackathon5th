@@ -1,9 +1,7 @@
 package com.jeongwoochang.sunrinhackathon5th.API;
 
-import com.jeongwoochang.sunrinhackathon5th.data.Board;
 import com.jeongwoochang.sunrinhackathon5th.data.BoardRes;
 import com.jeongwoochang.sunrinhackathon5th.data.ResBody;
-import com.jeongwoochang.sunrinhackathon5th.data.User;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -11,8 +9,9 @@ import retrofit2.http.*;
 import java.util.HashMap;
 
 public interface APIInterface {
+    @Multipart
     @POST("/register")
-    Call<ResBody> register(@Body User registerParm); //@PartMap HashMap<String, RequestBody> registerParm
+    Call<ResBody> register(@PartMap HashMap<String, RequestBody> registerParm);
 
     @POST("/login")
     Call<ResBody> login(@Query(value = "id", encoded = true) String id, @Query(value = "pw", encoded = true) String pw);
@@ -23,6 +22,7 @@ public interface APIInterface {
     @GET("/board")
     Call<BoardRes> getBoard();
 
-    @POST("/broad/add")
-    Call<ResBody> addBoard(@Body Board board);
+    @Multipart
+    @POST("/board/add")
+    Call<ResBody> addBoard(@PartMap HashMap<String, RequestBody> board);
 }

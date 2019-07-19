@@ -76,16 +76,19 @@ class RegisterActivity : AppCompatActivity() {
                 map["id"] = RequestBody.create(MediaType.parse("text/plain"), email.text.toString().trim())
                 map["pw"] = RequestBody.create(MediaType.parse("text/plain"), password.text.toString().trim())
                 map["username"] = RequestBody.create(MediaType.parse("text/plain"), username.text.toString().trim())
-                //map.put("profileimage\"; filename=\"profile.png\"", RequestBody.create(MediaType.parse("image/png"), currentProfileImgFile))
-                service.register(User(email.text.toString().trim(), password.text.toString().trim(), username.text.toString().trim())).enqueue(object : Callback<ResBody> {
+                map["photo\"; filename=\"profile.png\""] =
+                    RequestBody.create(MediaType.parse("image/png"), currentProfileImgFile)
+                service.register(map).enqueue(object : Callback<ResBody> {
                     override fun onFailure(call: Call<ResBody>, t: Throwable) {
                         Toast.makeText(applicationContext, "회원가입에 실패", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onResponse(call: Call<ResBody>, response: retrofit2.Response<ResBody>) {
-                        if ((response.body() as ResBody).isStatus) {
-                            Toast.makeText(applicationContext, "회원가입에 성공", Toast.LENGTH_SHORT).show()
-                            finish()
+                        if (response.code() == 200) {
+                            if ((response.body() as ResBody).isStatus) {
+                                Toast.makeText(applicationContext, "회원가입에 성공", Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
                         }
                     }
 
