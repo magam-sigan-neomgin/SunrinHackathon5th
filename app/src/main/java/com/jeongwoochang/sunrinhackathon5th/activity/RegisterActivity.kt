@@ -16,6 +16,7 @@ import com.jeongwoochang.sunrinhackathon5th.API.APIClient
 import com.jeongwoochang.sunrinhackathon5th.API.APIInterface
 import com.jeongwoochang.sunrinhackathon5th.R
 import com.jeongwoochang.sunrinhackathon5th.data.ResBody
+import com.jeongwoochang.sunrinhackathon5th.data.User
 import gun0912.tedbottompicker.TedBottomPicker
 import kotlinx.android.synthetic.main.activity_register.*
 import okhttp3.MediaType
@@ -45,7 +46,7 @@ class RegisterActivity : AppCompatActivity() {
                         bitmap.run { compress(Bitmap.CompressFormat.PNG, 100, out) }
                         out!!.flush()
                         out.close()
-                    }catch (e: Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
                     currentProfileImgFile = file
@@ -72,13 +73,11 @@ class RegisterActivity : AppCompatActivity() {
             if (username.text.isNotEmpty() && email.text.isNotEmpty() && password.text.isNotEmpty()) {
                 val service = APIClient.getClient(this).create(APIInterface::class.java)
                 val map = HashMap<String, RequestBody>()
-                map.put("id", RequestBody.create(MediaType.parse("text/plain"), email.text.toString().trim()))
-                map.put("pw", RequestBody.create(MediaType.parse("text/plain"), password.text.toString().trim()))
-                map.put("username", RequestBody.create(MediaType.parse("text/plain"), username.text.toString().trim()))
+                map["id"] = RequestBody.create(MediaType.parse("text/plain"), email.text.toString().trim())
+                map["pw"] = RequestBody.create(MediaType.parse("text/plain"), password.text.toString().trim())
+                map["username"] = RequestBody.create(MediaType.parse("text/plain"), username.text.toString().trim())
                 //map.put("profileimage\"; filename=\"profile.png\"", RequestBody.create(MediaType.parse("image/png"), currentProfileImgFile))
-                service.register(
-                    map
-                ).enqueue(object : Callback<ResBody> {
+                service.register(User(email.text.toString().trim(), password.text.toString().trim(), username.text.toString().trim())).enqueue(object : Callback<ResBody> {
                     override fun onFailure(call: Call<ResBody>, t: Throwable) {
                         Toast.makeText(applicationContext, "회원가입에 실패", Toast.LENGTH_SHORT).show()
                     }
@@ -86,7 +85,6 @@ class RegisterActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<ResBody>, response: retrofit2.Response<ResBody>) {
                         if ((response.body() as ResBody).isStatus) {
                             Toast.makeText(applicationContext, "회원가입에 성공", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(applicationContext, LoginActivity::class.java))
                             finish()
                         }
                     }
