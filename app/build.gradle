@@ -53,6 +53,7 @@ dependencies {
     implementation 'gun0912.ted:tedbottompicker:2.0.1'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.mikhaellopez:rxanimation:0.0.6'
+    implementation 'net.danlew:android.joda:2.9.9.3'
 
     //Permission
     implementation 'gun0912.ted:tedpermission:2.2.2'
