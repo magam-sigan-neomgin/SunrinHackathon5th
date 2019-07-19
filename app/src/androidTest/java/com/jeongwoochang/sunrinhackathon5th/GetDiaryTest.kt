@@ -5,6 +5,7 @@ import androidx.test.runner.AndroidJUnit4
 import com.jeongwoochang.sunrinhackathon5th.API.APIClient
 import com.jeongwoochang.sunrinhackathon5th.API.APIInterface
 import com.jeongwoochang.sunrinhackathon5th.data.DiaryRes
+import com.jeongwoochang.sunrinhackathon5th.data.ResBody
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,15 +27,23 @@ class GetDiaryTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
         val service = APIClient.getClient(appContext).create(APIInterface::class.java)
-        service.board.enqueue(object : Callback<DiaryRes> {
-            override fun onFailure(call: Call<DiaryRes>, t: Throwable) {
+        service.login("test@test.com", "test").enqueue(object : Callback<ResBody> {
+            override fun onFailure(call: Call<ResBody>, t: Throwable) {
+
             }
 
-            override fun onResponse(call: Call<DiaryRes>, response: Response<DiaryRes>) {
-                if (response.code() == 200 && (response.body() as DiaryRes).status) {
-                    val board = response.body() as DiaryRes
-                    assertEquals(board.diary.size, 100)
-                }
+            override fun onResponse(call: Call<ResBody>, response: Response<ResBody>) {
+                service.board.enqueue(object : Callback<DiaryRes> {
+                    override fun onFailure(call: Call<DiaryRes>, t: Throwable) {
+                    }
+
+                    override fun onResponse(call: Call<DiaryRes>, response: Response<DiaryRes>) {
+                        if (response.code() == 200 && (response.body() as DiaryRes).status) {
+                            val board = response.body() as DiaryRes
+                            System.out.println(board.toString())
+                        }
+                    }
+                })
             }
         })
     }
