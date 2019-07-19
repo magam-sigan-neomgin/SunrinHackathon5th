@@ -4,6 +4,8 @@ import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import com.jeongwoochang.sunrinhackathon5th.API.APIClient
 import com.jeongwoochang.sunrinhackathon5th.API.APIInterface
+import com.jeongwoochang.sunrinhackathon5th.data.BoardIDReq
+import com.jeongwoochang.sunrinhackathon5th.data.DiaryRes
 import com.jeongwoochang.sunrinhackathon5th.data.ResBody
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -29,7 +31,8 @@ class AddDiaryTest {
         val map = HashMap<String, RequestBody>()
         map["title"] = RequestBody.create(MediaType.parse("text/plain"), "test title")
         map["content"] = RequestBody.create(MediaType.parse("text/plain"), "test")
-        map["photo\"; filename=\"photo.png\""] = RequestBody.create(MediaType.parse("image/png"), "/sdcard/DCIM/Camera/IMG_20190621_090539.jpg")
+        map["photo\"; filename=\"photo.png\""] =
+            RequestBody.create(MediaType.parse("image/png"), "/sdcard/DCIM/Camera/IMG_20190621_090539.jpg")
         map["emotion"] = RequestBody.create(MediaType.parse("text/plain"), "sad")
         val service = APIClient.getClient(appContext).create(APIInterface::class.java)
 
@@ -42,16 +45,46 @@ class AddDiaryTest {
                 Timber.tag("OkHttp").d(response.body().toString())
                 Timber.tag("OkHttp").d(response.code().toString())
 
-                service.addBoard(map).enqueue(object : Callback<ResBody> {
-                    override fun onFailure(call: Call<ResBody>, t: Throwable) {
-                    }
+                if (response.code() == 200 && (response.body() as ResBody).isStatus) {
+                    service.addBoard(map).enqueue(object : Callback<ResBody> {
+                        override fun onFailure(call: Call<ResBody>, t: Throwable) {
+                        }
 
-                    override fun onResponse(call: Call<ResBody>, response: Response<ResBody>) {
-                        data = (response.body() as ResBody)
-                        System.out.println(data!!.toString())
-                        assert(data!!.isStatus)
-                    }
-                })
+                        override fun onResponse(call: Call<ResBody>, response: Response<ResBody>) {
+                            if (response.code() == 200 && (response.body() as ResBody).isStatus) {
+                                data = (response.body() as ResBody)
+                                System.out.println(data!!.toString())
+                                service.board.enqueue(object : Callback<DiaryRes> {
+                                    override fun onFailure(call: Call<DiaryRes>, t: Throwable) {
+
+                                    }
+
+                                    override fun onResponse(call: Call<DiaryRes>, response: Response<DiaryRes>) {
+                                        if (response.code() == 200 && (response.body() as DiaryRes).status) {
+                                            service.setBoardShare(BoardIDReq((response.body() as DiaryRes).diary.last().id))
+                                                .enqueue(
+                                                    object : Callback<ResBody> {
+                                                        override fun onFailure(call: Call<ResBody>, t: Throwable) {
+
+                                                        }
+
+                                                        override fun onResponse(
+                                                            call: Call<ResBody>,
+                                                            response: Response<ResBody>
+                                                        ) {
+                                                            if (response.code() == 200) {
+                                                                assert(data!!.isStatus && (response.body() as ResBody).isStatus)
+                                                            }
+                                                        }
+                                                    })
+                                        }
+                                    }
+
+                                })
+                            }
+                        }
+                    })
+                }
             }
         })
     }

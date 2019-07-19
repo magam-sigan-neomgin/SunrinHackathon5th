@@ -1,5 +1,6 @@
 package com.jeongwoochang.sunrinhackathon5th.API;
 
+import com.jeongwoochang.sunrinhackathon5th.data.BoardIDReq;
 import com.jeongwoochang.sunrinhackathon5th.data.DiaryRes;
 import com.jeongwoochang.sunrinhackathon5th.data.ResBody;
 import okhttp3.RequestBody;
@@ -25,4 +26,7 @@ public interface APIInterface {
     @Multipart
     @POST("/board/add")
     Call<ResBody> addBoard(@PartMap HashMap<String, RequestBody> board);
+
+    @POST("/board/share")
+    Call<ResBody> setBoardShare(@Body BoardIDReq id);
 }

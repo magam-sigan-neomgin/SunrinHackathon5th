@@ -22,8 +22,6 @@
 		</activity>
 		<activity android:name=".activity.MyDiaryActivity">
 		</activity>
-		<activity android:name=".activity.ChattingActivity">
-		</activity>
 		<activity android:name=".activity.RegisterActivity">
 		</activity>
 		<activity
