@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mainDate = findViewById(R.id.main_date);
 
         DateTime dateTime = new DateTime();
-        String today = dateTime.toString("오늘은 yyyy년 MM년 dd일 입니다.");
+        String today = dateTime.toString("오늘은 yyyy년 MM월 dd일 입니다.");
 
         mainDate.setText(today);
     }
