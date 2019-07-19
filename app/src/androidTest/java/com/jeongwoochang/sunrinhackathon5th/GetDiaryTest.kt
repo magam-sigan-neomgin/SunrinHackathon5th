@@ -33,7 +33,7 @@ class GetDiaryTest {
 
             override fun onResponse(call: Call<ResBody>, response: Response<ResBody>) {
                 Timber.d("*")
-                service.board.enqueue(object : Callback<DiaryRes> {
+                service.myBoard.enqueue(object : Callback<DiaryRes> {
                     override fun onFailure(call: Call<DiaryRes>, t: Throwable) {
                         Timber.d("*")
                         t.printStackTrace()
