@@ -1,22 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/drawerlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent" android:layout_height="match_parent"
+		android:background="@drawable/main_background"
+		android:orientation="vertical">
 
-    <!--메인 액티비티 FrameLayout안에 view를 배치하면 됨-->
-    <include layout="@layout/fragment_main"/>
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="150dp"
+			android:layout_marginLeft="30dp"
+			android:layout_marginRight="30dp"
+			android:padding="30dp"
+			android:background="@drawable/main_box"
+			android:orientation="horizontal">
 
-    <!--drawer layout을 만들고 그 안에 view를 배치하면 댐-->
-    <ListView
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:orientation="vertical"
-            android:divider="@color/colorPrimaryDark"
-            android:dividerHeight="1dp"
-            android:background="@color/colorPrimary"
-            android:id="@+id/drawer"/>
+		<de.hdodenhof.circleimageview.CircleImageView
+				android:layout_width="80dp"
+				android:layout_height="80dp"
+				android:layout_marginRight="15dp"
+				android:id="@+id/profileImage"
+				android:foreground="?attr/selectableItemBackground"
+				android:layout_centerHorizontal="true"
+				android:src="@drawable/ic_default_profile"
+				android:layout_gravity="center"/>
 
-</androidx.drawerlayout.widget.DrawerLayout>
+		<LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+					  android:orientation="vertical">
+
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+					  android:text="오늘은 어떤 고민이 있나요?"
+					  android:textSize="12sp"
+					  android:fontFamily="@font/nanum_square_b"
+					  android:textColor="@color/colorPrimaryPink"/>
+
+			<View android:layout_width="match_parent" android:layout_height="wrap_content"
+				  android:layout_weight="1"/>
+
+			<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+						  android:orientation="horizontal">
+
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+						  android:text="김나현"
+						  android:fontFamily="@font/nanum_square_eb"
+						  android:textSize="22sp"
+						  android:textColor="@color/colorPrimaryPink"
+						  android:id="@+id/name"/>
+
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+						  android:text="님"
+						  android:fontFamily="@font/nanum_square_b"
+						  android:textSize="22sp"
+						  android:textColor="@color/colorPrimaryPink"/>
+
+			</LinearLayout>
+
+			<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+					  android:text="Whynxt@naver.com"
+					  android:fontFamily="@font/nanum_square_r"
+					  android:textColor="@color/colorPrimaryPink"
+					  android:id="@+id/email"/>
+
+		</LinearLayout>
+
+
+
+	</LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:padding="20dp"
+		android:orientation="vertical">
+
+	<TextView
+			android:id="@+id/yourTitle"
+			android:layout_width="match_parent" android:layout_height="wrap_content"
+			android:text="Title"
+			android:fontFamily="@font/nanum_square_eb"
+			android:textSize="35sp"/>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+		<TextView
+				android:id="@+id/yourDate"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="2019년 07월 19일 22:44"
+				android:textSize="18sp"
+				android:fontFamily="@font/nanum_square_b"/>
+
+		<View android:layout_width="wrap_content" android:layout_height="0dp"
+			  android:layout_weight="1"/>
+
+	</LinearLayout>
+
+	<TextView
+			android:id="@+id/yourContent"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="아이고 ㅋㅋㅋㅋ"
+			android:fontFamily="@font/nanum_square_r"
+			android:textSize="18sp"/>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="20dp"
+			android:orientation="horizontal">
+
+		<ImageView
+				android:id="@+id/yourMusicAlbum"
+				android:layout_width="110dp"
+				android:layout_height="110dp"
+				android:layout_marginRight="20dp"
+				android:src="@drawable/ic_default_profile"/>
+
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
+
+			<TextView
+					android:id="@+id/yourMusicTitle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="노래방에서"
+					android:fontFamily="@font/nanum_square_b"
+					android:textSize="25sp"/>
+
+			<TextView
+					android:id="@+id/yourMusicSinger"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="5dp"
+					android:text="장범준"
+					android:fontFamily="@font/nanum_square_r"
+					android:textSize="18dp"/>
+
+			<View android:layout_width="match_parent" android:layout_height="wrap_content"
+				  android:layout_weight="1" />
+
+			<Button
+					android:id="@+id/myMusicButton"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="right"
+					android:text="노래 듣기"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
