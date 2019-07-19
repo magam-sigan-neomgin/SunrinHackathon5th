@@ -1,16 +1,28 @@
 package com.jeongwoochang.sunrinhackathon5th.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.jeongwoochang.sunrinhackathon5th.API.APIClient;
+import com.jeongwoochang.sunrinhackathon5th.API.APIInterface;
 import com.jeongwoochang.sunrinhackathon5th.R;
 import com.jeongwoochang.sunrinhackathon5th.data.Board;
+import com.jeongwoochang.sunrinhackathon5th.data.UsernameRes;
+import org.joda.time.Interval;
+import org.joda.time.Period;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdapter.YourDiaryHolder> {
 
@@ -18,6 +30,11 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
     private OnItemClickListener onItemClickListener;
     private OnLikeButtonClickListener onLikeButtonClickListener;
     private OnCommentButtonClickListener onCommentButtonClickListener;
+    private Context context;
+
+    public YourDiaryListAdapter(Context context) {
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -27,12 +44,34 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull YourDiaryHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final YourDiaryHolder holder, int position) {
         final Board item = items.get(position);
         holder.title.setText(item.getTitle());
-        holder.date.setText(item.getDate());
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+            holder.date.setText(getSummaryPeriod(sdf.parse(item.getDate())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            holder.date.setText("날짜 형식 오류");
+        }
         holder.content.setText(item.getContent());
-        holder.author.setText(item.getAuthor());
+        APIInterface service = APIClient.getClient(context).create(APIInterface.class);
+        service.convertIDToUsername(item.getAuthor()).enqueue(new Callback<UsernameRes>() {
+            @Override
+            public void onResponse(Call<UsernameRes> call, Response<UsernameRes> response) {
+                if(response.code() == 200){
+                    if(response.body().getStatus()){
+                        holder.author.setText(response.body().getUsername().getUsername());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UsernameRes> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -104,7 +143,29 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
         void onLickClick(Board diaryToShare);
     }
 
-    public interface OnCommentButtonClickListener{
+    public interface OnCommentButtonClickListener {
         void onCommentClick(Board diaryToComment);
+    }
+
+    private String getSummaryPeriod(Date date) {
+        String resultPeriod = "";
+        Interval interval = new Interval(date.getTime(), new Date().getTime());
+        Period period = interval.toPeriod();
+        if (period.getYears() > 0) {
+            resultPeriod = period.getYears() + "년 전";
+        } else if (period.getMonths() > 0) {
+            resultPeriod = period.getMonths() + "개월 전";
+        } else if (period.getWeeks() > 0) {
+            resultPeriod = period.getWeeks() + "주 전";
+        } else if (period.getHours() > 0) {
+            resultPeriod = period.getDays() + "일 전";
+        } else if (period.getWeeks() > 0) {
+            resultPeriod = period.getHours() + "시간 전";
+        } else if (period.getMinutes() > 0) {
+            resultPeriod = period.getMinutes() + "분 전";
+        } else if (period.getSeconds() > 0) {
+            resultPeriod = period.getSeconds() + "초 전";
+        }
+        return resultPeriod;
     }
 }

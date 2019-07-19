@@ -9,8 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.jeongwoochang.sunrinhackathon5th.R;
 import com.jeongwoochang.sunrinhackathon5th.data.Board;
+import org.joda.time.Interval;
+import org.joda.time.Period;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class MyDiaryListAdapter extends RecyclerView.Adapter<MyDiaryListAdapter.MyDiaryHolder> {
     private ArrayList<Board> items;
@@ -27,7 +33,14 @@ public class MyDiaryListAdapter extends RecyclerView.Adapter<MyDiaryListAdapter.
     public void onBindViewHolder(@NonNull MyDiaryHolder holder, int position) {
         final Board item = items.get(position);
         holder.title.setText(item.getTitle());
-        holder.date.setText(item.getDate());
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+            holder.date.setText(getSummaryPeriod(sdf.parse(item.getDate())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            holder.date.setText("날짜 형식 오류");
+        }
         holder.content.setText(item.getContent());
     }
 
@@ -76,5 +89,27 @@ public class MyDiaryListAdapter extends RecyclerView.Adapter<MyDiaryListAdapter.
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position, Board board);
+    }
+
+    private String getSummaryPeriod(Date date) {
+        String resultPeriod = "";
+        Interval interval = new Interval(date.getTime(), new Date().getTime());
+        Period period = interval.toPeriod();
+        if (period.getYears() > 0) {
+            resultPeriod = period.getYears() + "년 전";
+        } else if (period.getMonths() > 0) {
+            resultPeriod = period.getMonths() + "개월 전";
+        } else if (period.getWeeks() > 0) {
+            resultPeriod = period.getWeeks() + "주 전";
+        } else if (period.getHours() > 0) {
+            resultPeriod = period.getDays() + "일 전";
+        } else if (period.getWeeks() > 0) {
+            resultPeriod = period.getHours() + "시간 전";
+        } else if (period.getMinutes() > 0) {
+            resultPeriod = period.getMinutes() + "분 전";
+        } else if (period.getSeconds() > 0) {
+            resultPeriod = period.getSeconds() + "초 전";
+        }
+        return resultPeriod;
     }
 }

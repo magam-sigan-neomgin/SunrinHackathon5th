@@ -27,7 +27,7 @@ public class YourDiaryListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_your_diary_list);
 
         yourDiaryList = findViewById(R.id.recycler_your);
-        adapter = new YourDiaryListAdapter();
+        adapter = new YourDiaryListAdapter(this);
         adapter.setOnItemClickListener(new YourDiaryListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position, Board board) {

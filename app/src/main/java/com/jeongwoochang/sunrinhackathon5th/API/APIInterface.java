@@ -36,4 +36,13 @@ public interface APIInterface {
 
     @GET("/profile")
     Call<ProfileRes> getProfile();
+
+    @POST("/board/unlike")
+    Call<ResBody> unlike(@Body BoardIDReq id);
+
+    @POST("/board/like")
+    Call<ResBody> like(@Body BoardIDReq id);
+
+    @GET("/id/to/username")
+    Call<UsernameRes> convertIDToUsername(@Query("id") String id);
 }

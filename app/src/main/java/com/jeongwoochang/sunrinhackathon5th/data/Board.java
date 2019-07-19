@@ -32,13 +32,13 @@ public class Board implements Serializable {
     private Integer isShared;
     @SerializedName("likes")
     @Expose
-    private List<Object> likes = null;
+    private List<Like> likes = null;
     @SerializedName("suggest")
     @Expose
     private Suggest suggest;
     @SerializedName("comments")
     @Expose
-    private List<Object> comments = null;
+    private List<Comment> comments = null;
     @SerializedName("create_time")
     @Expose
     private String date;
@@ -99,11 +99,11 @@ public class Board implements Serializable {
         this.isShared = isShared;
     }
 
-    public List<Object> getLikes() {
+    public List<Like> getLikes() {
         return likes;
     }
 
-    public void setLikes(List<Object> likes) {
+    public void setLikes(List<Like> likes) {
         this.likes = likes;
     }
 
@@ -115,11 +115,11 @@ public class Board implements Serializable {
         this.suggest = suggest;
     }
 
-    public List<Object> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Object> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
