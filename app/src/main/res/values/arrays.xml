@@ -5,4 +5,9 @@
         <item>그냥 그래요</item>
         <item>슬퍼요</item>
     </string-array>
+    <string-array name="key_emotion">
+        <item>happy</item>
+        <item>soso</item>
+        <item>sad</item>
+    </string-array>
 </resources>

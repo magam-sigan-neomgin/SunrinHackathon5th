@@ -46,23 +46,6 @@ public class MyDiaryActivity extends AppCompatActivity {
         date.setText(data.getDate());
 
         final APIInterface service = APIClient.getClient(this).create(APIInterface.class);
-        service.getMyBoard().enqueue(new Callback<DiaryRes>() {
-            @Override
-            public void onResponse(Call<DiaryRes> call, Response<DiaryRes> response) {
-                if (response.code() == 200) {
-                    if (response.body().getStatus()) {
-                        //DiaryRes data = response.body();
-
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<DiaryRes> call, Throwable t) {
-
-            }
-        });
-
         sharBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

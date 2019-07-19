@@ -32,20 +32,7 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
         holder.title.setText(item.getTitle());
         holder.date.setText(item.getDate());
         holder.content.setText(item.getContent());
-        holder.like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onLikeButtonClickListener != null)
-                    onLikeButtonClickListener.onLickClick(item);
-            }
-        });
-        holder.comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(onCommentButtonClickListener != null)
-                    onCommentButtonClickListener.onCommentClick(item);
-            }
-        });
+        holder.author.setText(item.getAuthor());
     }
 
     @Override
@@ -59,8 +46,7 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
         TextView title;
         TextView date;
         TextView content;
-        Button like;
-        Button comment;
+        TextView author;
 
         YourDiaryHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,14 +54,13 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
             title = itemView.findViewById(R.id.yourTitle);
             date = itemView.findViewById(R.id.yourDate);
             content = itemView.findViewById(R.id.yourContent);
-//            like = itemView.findViewById(R.id.yourLike);
-//            comment = itemView.findViewById(R.id.yourComment);
+            author = itemView.findViewById(R.id.yourName);
         }
 
         @Override
         public void onClick(View v) {
             if (onItemClickListener != null)
-                onItemClickListener.onItemClick(v, getAdapterPosition());
+                onItemClickListener.onItemClick(v, getAdapterPosition(), items.get(getAdapterPosition()));
         }
     }
 
@@ -112,7 +97,7 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View v, int position);
+        void onItemClick(View v, int position, Board board);
     }
 
     public interface OnLikeButtonClickListener {
