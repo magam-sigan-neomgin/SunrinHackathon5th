@@ -1,6 +1,6 @@
 package com.jeongwoochang.sunrinhackathon5th.API;
 
-import com.jeongwoochang.sunrinhackathon5th.data.BoardRes;
+import com.jeongwoochang.sunrinhackathon5th.data.DiaryRes;
 import com.jeongwoochang.sunrinhackathon5th.data.ResBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -20,7 +20,7 @@ public interface APIInterface {
     Call<ResBody> status();
 
     @GET("/board")
-    Call<BoardRes> getBoard();
+    Call<DiaryRes> getBoard();
 
     @Multipart
     @POST("/board/add")
