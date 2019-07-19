@@ -19,7 +19,7 @@ public interface APIInterface {
     @GET("/status")
     Call<ResBody> status();
 
-    @GET("/board")
+    @GET("/board/my")
     Call<DiaryRes> getBoard();
 
     @Multipart

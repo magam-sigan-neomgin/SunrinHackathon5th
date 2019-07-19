@@ -17,6 +17,7 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
     private ArrayList<Diary> items;
     private OnItemClickListener onItemClickListener;
     private OnLikeButtonClickListener onLikeButtonClickListener;
+    private OnCommentButtonClickListener onCommentButtonClickListener;
 
     @NonNull
     @Override
@@ -31,11 +32,18 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
         holder.title.setText(item.getTitle());
         holder.date.setText(item.getDate());
         holder.content.setText(item.getContent());
-        holder.share.setOnClickListener(new View.OnClickListener() {
+        holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onLikeButtonClickListener != null)
-                    onLikeButtonClickListener.onLickClicked(item);
+                    onLikeButtonClickListener.onLickClick(item);
+            }
+        });
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onCommentButtonClickListener != null)
+                    onCommentButtonClickListener.onCommentClick(item);
             }
         });
     }
@@ -51,7 +59,8 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
         TextView title;
         TextView date;
         TextView content;
-        Button share;
+        Button like;
+        Button comment;
 
         YourDiaryHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,7 +68,8 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
             title = itemView.findViewById(R.id.yourTitle);
             date = itemView.findViewById(R.id.yourDate);
             content = itemView.findViewById(R.id.yourContent);
-            share = itemView.findViewById(R.id.yourShare);
+            like = itemView.findViewById(R.id.yourLike);
+            comment = itemView.findViewById(R.id.yourComment);
         }
 
         @Override
@@ -93,11 +103,23 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
         this.onLikeButtonClickListener = onLikeButtonClickListener;
     }
 
+    public OnCommentButtonClickListener getOnCommentButtonClickListener() {
+        return onCommentButtonClickListener;
+    }
+
+    public void setOnCommentButtonClickListener(OnCommentButtonClickListener onCommentButtonClickListener) {
+        this.onCommentButtonClickListener = onCommentButtonClickListener;
+    }
+
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
     }
 
     public interface OnLikeButtonClickListener {
-        void onLickClicked(Diary diaryToShare);
+        void onLickClick(Diary diaryToShare);
+    }
+
+    public interface OnCommentButtonClickListener{
+        void onCommentClick(Diary diaryToComment);
     }
 }

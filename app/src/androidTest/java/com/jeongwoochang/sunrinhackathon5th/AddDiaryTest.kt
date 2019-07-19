@@ -1,6 +1,5 @@
 package com.jeongwoochang.sunrinhackathon5th
 
-import android.util.Log
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import com.jeongwoochang.sunrinhackathon5th.API.APIClient
@@ -8,10 +7,8 @@ import com.jeongwoochang.sunrinhackathon5th.API.APIInterface
 import com.jeongwoochang.sunrinhackathon5th.data.ResBody
 import okhttp3.MediaType
 import okhttp3.RequestBody
-
 import org.junit.Test
 import org.junit.runner.RunWith
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,7 +30,7 @@ class AddDiaryTest {
         map["title"] = RequestBody.create(MediaType.parse("text/plain"), "test title")
         map["content"] = RequestBody.create(MediaType.parse("text/plain"), "test")
         map["photo\"; filename=\"photo.png\""] = RequestBody.create(MediaType.parse("image/png"), "/sdcard/DCIM/Camera/IMG_20190621_090539.jpg")
-        map["emotion"] = RequestBody.create(MediaType.parse("text/plain"), "슬프다")
+        map["emotion"] = RequestBody.create(MediaType.parse("text/plain"), "sad")
         val service = APIClient.getClient(appContext).create(APIInterface::class.java)
 
         service.login("woochang4862", "woochang").enqueue(object : Callback<ResBody> {
@@ -52,11 +49,10 @@ class AddDiaryTest {
                     override fun onResponse(call: Call<ResBody>, response: Response<ResBody>) {
                         data = (response.body() as ResBody)
                         System.out.println(data!!.toString())
+                        assert(data!!.isStatus)
                     }
                 })
             }
         })
-
-        assert(data!!.isStatus)
     }
 }
