@@ -6,14 +6,14 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class BoardRes {
+public class DiaryRes {
 
     @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("board")
+    @SerializedName("diary")
     @Expose
-    private List<Board> board = null;
+    private List<Diary> diary = null;
 
     public Boolean getStatus() {
         return status;
@@ -23,17 +23,17 @@ public class BoardRes {
         this.status = status;
     }
 
-    public List<Board> getBoard() {
-        return board;
+    public List<Diary> getDiary() {
+        return diary;
     }
 
-    public void setBoard(List<Board> board) {
-        this.board = board;
+    public void setDiary(List<Diary> diary) {
+        this.diary = diary;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("status", status).append("board", board).toString();
+        return new ToStringBuilder(this).append("status", status).append("diary", diary).toString();
     }
 
 }

@@ -25,6 +25,9 @@ import com.jeongwoochang.sunrinhackathon5th.API.APIInterface
 import com.jeongwoochang.sunrinhackathon5th.R
 import com.jeongwoochang.sunrinhackathon5th.data.ResBody
 import com.jeongwoochang.sunrinhackathon5th.util.SharedPreferencesHelper
+import com.mikhaellopez.rxanimation.RxAnimation
+import com.mikhaellopez.rxanimation.fadeIn
+import com.mikhaellopez.rxanimation.resize
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,6 +55,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             false
         })
 
+        //RxAnimation.from(email_sign_in_button).fadeIn().resize(60,60)
         email_sign_in_button.setOnClickListener { login() }
         email_sign_up_button.setOnClickListener { startActivity(Intent(this, RegisterActivity::class.java)) }
 

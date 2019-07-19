@@ -23,7 +23,7 @@ import timber.log.Timber
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class AddBoardTest {
+class AddDiaryTest {
     @Test
     fun useAppContext() {
         // Context of the app under test.
@@ -33,6 +33,7 @@ class AddBoardTest {
         map["title"] = RequestBody.create(MediaType.parse("text/plain"), "test title")
         map["content"] = RequestBody.create(MediaType.parse("text/plain"), "test")
         map["photo\"; filename=\"photo.png\""] = RequestBody.create(MediaType.parse("image/png"), "/sdcard/DCIM/Camera/IMG_20190621_090539.jpg")
+        map["emotion"] = RequestBody.create(MediaType.parse("text/plain"), "슬프다")
         val service = APIClient.getClient(appContext).create(APIInterface::class.java)
 
         service.login("woochang4862", "woochang").enqueue(object : Callback<ResBody> {
