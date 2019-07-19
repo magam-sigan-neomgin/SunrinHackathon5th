@@ -47,6 +47,5 @@ public class YourDiaryActivity extends AppCompatActivity {
         final APIInterface service = APIClient.getClient(this).create(APIInterface.class);
 
 
-
     }
 }
