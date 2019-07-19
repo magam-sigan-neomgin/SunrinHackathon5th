@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/write_diary_background"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+    <View android:layout_width="match_parent" android:layout_height="wrap_content"
+          android:layout_weight="1"/>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:minHeight="80dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="6dp"
+            android:layout_gravity="center_horizontal"
+            android:foreground="?attr/selectableItemBackground">
+
+        <TextView
+                android:id="@+id/main_date"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="25dp"
+                android:fontFamily="@font/nanum_square_eb"
+                android:textColor="@color/colorPrimaryGreen"
+                android:gravity="center_vertical"
+                android:text="일기 작성"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_margin="10dp"
+            android:minHeight="80dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="6dp"
+            android:layout_gravity="center_horizontal"
+            android:foreground="?attr/selectableItemBackground">
+
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+                      android:orientation="vertical">
+
+            <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:padding="5dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="제목 |"
+                          android:fontFamily="@font/nanum_square_eb"
+                          android:textColor="@color/colorPrimaryGreen"
+                          android:textSize="20sp"
+                          android:layout_centerVertical="true"
+                          android:id="@+id/hintTITLE"/>
+
+                <AutoCompleteTextView
+                        android:id="@+id/write_title"
+                        android:layout_width="match_parent"
+                        android:layout_toRightOf="@id/hintTITLE"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/nanum_square_r"
+                        android:textSize="20sp"
+                        android:textColor="#7b7b7b"
+                        android:background="@null"
+                        android:layout_marginLeft="5dp"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:singleLine="true"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="현재 기분 |"
+                          android:fontFamily="@font/nanum_square_eb"
+                          android:textColor="@color/colorPrimaryGreen"
+                          android:textSize="20sp"
+                          android:layout_centerVertical="true"
+                          android:id="@+id/hintEMOTION"/>
+
+                <View android:layout_width="wrap_content" android:layout_height="match_parent"
+                      android:layout_weight="1"/>
+
+                <TextView
+                        android:id="@+id/write_emotion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20sp"
+                        android:text="현재 기분 선택"
+                        android:textSize="18sp"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/colorPrimaryYellow"
+                        android:fontFamily="@font/nanum_square_b"
+                        android:paddingLeft="5dp"
+                        android:maxLines="1"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20sp"
+                        android:text="▼"
+                        android:textSize="18sp"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/colorPrimaryYellow"
+                        android:fontFamily="@font/nanum_square_b"
+                        android:paddingLeft="5dp"
+                        android:maxLines="1"/>
+
+            </LinearLayout>
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:layout_marginLeft="20dp"
+                      android:paddingTop="10dp"
+                      android:paddingLeft="5dp"
+                      android:text="내용 작성 |"
+                      android:fontFamily="@font/nanum_square_eb"
+                      android:textColor="@color/colorPrimaryGreen"
+                      android:textSize="20sp"
+                      android:layout_centerVertical="true"
+                      android:id="@+id/hintCONTENT"/>
+
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:layout_marginLeft="20dp"
+                      android:layout_marginRight="20dp"
+                      android:layout_marginBottom="20dp"
+                      android:fontFamily="@font/nanum_square_r"
+                      android:textSize="18sp"
+                      android:textColor="#7b7b7b"
+                      android:lineSpacingMultiplier="1.2"
+                      android:gravity="top"
+                      android:id="@+id/write_content"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/write_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:minHeight="80dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="6dp"
+            android:layout_gravity="center_horizontal"
+            android:foreground="?attr/selectableItemBackground">
+
+        <TextView
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/nanum_square_eb"
+                android:textColor="@color/colorPrimaryGreen"
+                android:gravity="center"
+                android:text="작성 완료"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <View android:layout_width="match_parent" android:layout_height="wrap_content"
+          android:layout_weight="1"/>
+
+</LinearLayout>
