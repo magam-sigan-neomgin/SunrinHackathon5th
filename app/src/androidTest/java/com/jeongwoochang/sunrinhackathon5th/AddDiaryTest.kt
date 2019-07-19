@@ -54,7 +54,7 @@ class AddDiaryTest {
                             if (response.code() == 200 && (response.body() as ResBody).isStatus) {
                                 data = (response.body() as ResBody)
                                 System.out.println(data!!.toString())
-                                service.board.enqueue(object : Callback<DiaryRes> {
+                                service.myBoard.enqueue(object : Callback<DiaryRes> {
                                     override fun onFailure(call: Call<DiaryRes>, t: Throwable) {
 
                                     }
