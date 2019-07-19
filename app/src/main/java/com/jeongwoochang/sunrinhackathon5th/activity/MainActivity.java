@@ -16,12 +16,13 @@ import com.jeongwoochang.sunrinhackathon5th.data.DiaryRes;
 import com.jeongwoochang.sunrinhackathon5th.data.ProfileRes;
 import com.jeongwoochang.sunrinhackathon5th.util.SharedPreferencesHelper;
 import com.squareup.picasso.Picasso;
-import net.danlew.android.joda.JodaTimeAndroid;
-import org.joda.time.DateTime;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     TextView mainDate;
     TextView name, email;
     ImageView profileImage;
+
+    long mNow;
+    Date date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +93,11 @@ public class MainActivity extends AppCompatActivity {
         myDiaryBtn = findViewById(R.id.main_btn_diary_my);
         yourDiaryBtn = findViewById(R.id.main_btn_diary_your);
 
-        DateTime dateTime = new DateTime();
-        String today = dateTime.toString("오늘은 yyyy년 MM월 dd일 입니다.");
+        mNow = System.currentTimeMillis();
+        date = new Date(mNow);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("오늘은 yyyy년 MM월 dd일 입니다.");
 
-        mainDate.setText(today);
+        mainDate.setText(simpleDateFormat.format(date));
 
         writeDiaryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,14 +122,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-}
-
-class MyApp extends Application {
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        JodaTimeAndroid.init(this);
     }
 }
