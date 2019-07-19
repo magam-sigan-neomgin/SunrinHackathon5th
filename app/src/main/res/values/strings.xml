@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">SunrinHackathon5th</string>
-    <string name="title_activity_login">괜찮아, 잘 될거야</string>
+    <string name="app_name">Green Diary</string>
+    <string name="title_activity_login">Green Diary</string>
 
 
     <!-- Strings related to login -->

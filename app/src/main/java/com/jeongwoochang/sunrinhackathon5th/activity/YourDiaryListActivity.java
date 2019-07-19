@@ -16,6 +16,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class YourDiaryListActivity extends AppCompatActivity {
 
     private RecyclerView yourDiaryList;
@@ -46,7 +49,9 @@ public class YourDiaryListActivity extends AppCompatActivity {
             public void onResponse(Call<DiaryRes> call, Response<DiaryRes> response) {
                 if (response.code() == 200) {
                     if (response.body().getStatus()) {
-                        adapter.setItems(response.body().getBoard());
+                        ArrayList items = response.body().getBoard();
+                        Collections.reverse(items);
+                        adapter.setItems(items);
                         adapter.notifyDataSetChanged();
                     }
                 }

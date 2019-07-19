@@ -56,7 +56,7 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
             holder.date.setText("날짜 형식 오류");
         }
         holder.content.setText(item.getContent());
-        APIInterface service = APIClient.getClient(context).create(APIInterface.class);
+        /*APIInterface service = APIClient.getClient(context).create(APIInterface.class);
         service.convertIDToUsername(item.getAuthor()).enqueue(new Callback<UsernameRes>() {
             @Override
             public void onResponse(Call<UsernameRes> call, Response<UsernameRes> response) {
@@ -71,7 +71,8 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
             public void onFailure(Call<UsernameRes> call, Throwable t) {
 
             }
-        });
+        });*/
+        holder.author.setText(item.getAuthor());
     }
 
     @Override

@@ -70,6 +70,24 @@
 
             </LinearLayout>
 
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:layout_marginTop="5dp"
+                          android:text="당시 내 감정 | "
+                          android:fontFamily="@font/nanum_square_b"
+                />
+
+                <TextView
+                        android:id="@+id/myEmotion"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="그냥 그래요"
+                        android:fontFamily="@font/nanum_square_r"/>
+
+            </LinearLayout>
+
             <TextView
                     android:id="@+id/myContent"
                     android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -102,25 +120,25 @@
                 android:orientation="vertical">
 
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="추천 받은 음악"
-            android:fontFamily="@font/nanum_square_eb"
-            android:textSize="18sp"/>
+                      android:text="추천 받은 음악"
+                      android:fontFamily="@font/nanum_square_eb"
+                      android:textSize="18sp"/>
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
-            android:orientation="horizontal">
+                          android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/myMusicAlbum"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:foreground="?attr/selectableItemBackground"
                         android:src="@drawable/ic_launcher_background"
                         android:layout_gravity="center"/>
 
                 <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="20dp"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="10dp"
                         android:paddingTop="10dp"
                         android:orientation="vertical">
 
@@ -130,26 +148,35 @@
                             android:layout_height="wrap_content"
                             android:text="노래방에서"
                             android:fontFamily="@font/nanum_square_b"
-                            android:textSize="25sp"/>
+                            android:textSize="18sp"
+                            android:maxLines="1"/>
 
-                    <TextView
-                            android:id="@+id/myMusicSinger"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="장범준"
-                            android:fontFamily="@font/nanum_square_r"
-                            android:textSize="18dp"/>
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="horizontal">
 
-                    <View android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:layout_weight="1"/>
+                        <TextView
+                                android:id="@+id/myMusicSinger"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="장범준"
+                                android:maxLines="1"
+                                android:maxWidth="180dp"
+                                android:fontFamily="@font/nanum_square_r"
+                                android:textSize="16sp"/>
 
-                    <ImageView
-                            android:id="@+id/myMusicPlay"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="right"
-                            android:src="@drawable/ic_play"/>
+                        <View android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:layout_weight="1"/>
+
+                        <ImageView
+                                android:id="@+id/myMusicPlay"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="right"
+                                android:src="@drawable/ic_play"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
