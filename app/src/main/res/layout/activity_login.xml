@@ -39,19 +39,22 @@
 
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                app:cardCornerRadius="10dp"
-                android:layout_margin="1dp"
-                app:cardElevation="1dp"
+                app:cardCornerRadius="20dp"
+                android:layout_margin="7dp"
+                app:cardElevation="10dp"
                 android:layout_height="wrap_content">
 
             <RelativeLayout
                     android:layout_margin="5dp"
-                    android:layout_width="match_parent" android:layout_height="wrap_content">
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingLeft="7dp">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:text="ID |"
                           android:fontFamily="@font/nanum_square_eb"
                           android:textColor="#ff9797"
+                          android:gravity="center_vertical"
                           android:id="@+id/hintID"/>
 
                 <AutoCompleteTextView
@@ -71,19 +74,22 @@
 
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="1dp"
-                android:layout_margin="1dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="10dp"
+                android:layout_margin="7dp"
                 android:layout_height="wrap_content">
 
             <RelativeLayout
                     android:layout_margin="5dp"
-                    android:layout_width="match_parent" android:layout_height="wrap_content">
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingLeft="7dp">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:text="PASSWORD |"
                           android:textColor="#ffd154"
                           android:fontFamily="@font/nanum_square_eb"
+                          android:gravity="center_vertical"
                           android:id="@+id/hintPW"/>
 
                 <EditText
@@ -127,8 +133,9 @@
 
         <androidx.cardview.widget.CardView android:layout_width="60dp"
                                            app:cardCornerRadius="30dp"
+                                           app:cardElevation="10dp"
+                                           android:layout_margin="10dp"
                                            android:id="@+id/email_sign_in_button"
-                                           android:elevation="20dp"
                                            android:layout_gravity="center_horizontal"
                                            android:foreground="?attr/selectableItemBackground"
                                            android:layout_height="60dp">
