@@ -1,5 +1,7 @@
 package com.jeongwoochang.sunrinhackathon5th.API;
 
+import com.jeongwoochang.sunrinhackathon5th.data.Board;
+import com.jeongwoochang.sunrinhackathon5th.data.BoardRes;
 import com.jeongwoochang.sunrinhackathon5th.data.ResBody;
 import com.jeongwoochang.sunrinhackathon5th.data.User;
 import okhttp3.RequestBody;
@@ -17,4 +19,10 @@ public interface APIInterface {
 
     @GET("/status")
     Call<ResBody> status();
+
+    @GET("/board")
+    Call<BoardRes> getBoard();
+
+    @POST("/broad/add")
+    Call<ResBody> addBoard(@Body Board board);
 }

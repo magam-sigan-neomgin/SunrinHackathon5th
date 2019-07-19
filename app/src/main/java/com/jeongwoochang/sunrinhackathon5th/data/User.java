@@ -1,6 +1,7 @@
 package com.jeongwoochang.sunrinhackathon5th.data;
 
 import com.google.gson.annotations.SerializedName;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class User {
     @SerializedName("id")
@@ -40,5 +41,10 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("pw", pw).append("username", username).toString();
     }
 }
