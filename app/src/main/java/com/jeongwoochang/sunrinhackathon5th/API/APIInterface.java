@@ -1,8 +1,6 @@
 package com.jeongwoochang.sunrinhackathon5th.API;
 
-import com.jeongwoochang.sunrinhackathon5th.data.BoardIDReq;
-import com.jeongwoochang.sunrinhackathon5th.data.DiaryRes;
-import com.jeongwoochang.sunrinhackathon5th.data.ResBody;
+import com.jeongwoochang.sunrinhackathon5th.data.*;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -32,4 +30,10 @@ public interface APIInterface {
 
     @POST("/board/share")
     Call<ResBody> setBoardShare(@Body BoardIDReq id);
+
+    @POST("/board/comment")
+    Call<ResBody> addComment(@Body CommentReq comment);
+
+    @GET("/profile")
+    Call<ProfileRes> getProfile();
 }

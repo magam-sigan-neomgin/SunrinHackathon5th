@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
         TedPermission.with(this)
             .setPermissionListener(object : PermissionListener {
                 override fun onPermissionGranted() {
-                    val bitmap = BitmapFactory.decodeResource(resources, R.drawable.default_profile_image)
+                    val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_default_profile)
                     val path = getExternalStoragePublicDirectory(DIRECTORY_PICTURES).toString() + "/profile.png"
                     val file = File(path)
                     val out: OutputStream? = FileOutputStream(file)

@@ -3,6 +3,7 @@ package com.jeongwoochang.sunrinhackathon5th.activity;
 import android.app.Application;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import com.jeongwoochang.sunrinhackathon5th.API.APIInterface;
 import com.jeongwoochang.sunrinhackathon5th.MyApplication;
 import com.jeongwoochang.sunrinhackathon5th.R;
 import com.jeongwoochang.sunrinhackathon5th.data.DiaryRes;
+import com.jeongwoochang.sunrinhackathon5th.data.ProfileRes;
 import com.jeongwoochang.sunrinhackathon5th.util.SharedPreferencesHelper;
+import com.squareup.picasso.Picasso;
 import net.danlew.android.joda.JodaTimeAndroid;
 import org.joda.time.DateTime;
 import retrofit2.Call;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     CardView writeDiaryBtn, myDiaryBtn, yourDiaryBtn;
     TextView mainDate;
+    TextView name, email;
+    ImageView profileImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        profileImage = findViewById(R.id.profileImage);
+
         APIInterface service = APIClient.getClient(this).create(APIInterface.class);
+        service.getProfile().enqueue(new Callback<ProfileRes>() {
+            @Override
+            public void onResponse(Call<ProfileRes> call, Response<ProfileRes> response) {
+                if (response.code() == 200) {
+                    if (response.body().getStatus()) {
+                        ProfileRes data = response.body();
+
+                        email.setText(data.getProfile().getId());
+                        name.setText(data.getProfile().getUsername());
+                        Picasso.get().load("https://good-night-image-bucket.s3.ap-northeast-2.amazonaws.com/" + data.getProfile().getImage()).into(profileImage);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileRes> call, Throwable t) {
+
+            }
+        });
         service.getMyBoard().enqueue(new Callback<DiaryRes>() {
             @Override
             public void onResponse(Call<DiaryRes> call, Response<DiaryRes> response) {
