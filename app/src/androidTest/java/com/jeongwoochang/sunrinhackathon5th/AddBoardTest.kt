@@ -1,5 +1,6 @@
 package com.jeongwoochang.sunrinhackathon5th
 
+import android.util.Log
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import com.jeongwoochang.sunrinhackathon5th.API.APIClient
@@ -27,19 +28,34 @@ class AddBoardTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
+        var data: ResBody? = null
         val map = HashMap<String, RequestBody>()
         map["title"] = RequestBody.create(MediaType.parse("text/plain"), "test title")
         map["content"] = RequestBody.create(MediaType.parse("text/plain"), "test")
         map["photo\"; filename=\"photo.png\""] = RequestBody.create(MediaType.parse("image/png"), "/sdcard/DCIM/Camera/IMG_20190621_090539.jpg")
         val service = APIClient.getClient(appContext).create(APIInterface::class.java)
-        service.addBoard(map).enqueue(object : Callback<ResBody> {
+
+        service.login("woochang4862", "woochang").enqueue(object : Callback<ResBody> {
             override fun onFailure(call: Call<ResBody>, t: Throwable) {
+                t.printStackTrace()
             }
 
             override fun onResponse(call: Call<ResBody>, response: Response<ResBody>) {
-                if (response.code() == 200)
-                    assert(response.body()!!.isStatus)
+                Timber.tag("OkHttp").d(response.body().toString())
+                Timber.tag("OkHttp").d(response.code().toString())
+
+                service.addBoard(map).enqueue(object : Callback<ResBody> {
+                    override fun onFailure(call: Call<ResBody>, t: Throwable) {
+                    }
+
+                    override fun onResponse(call: Call<ResBody>, response: Response<ResBody>) {
+                        data = (response.body() as ResBody)
+                        System.out.println(data!!.toString())
+                    }
+                })
             }
         })
+
+        assert(data!!.isStatus)
     }
 }
