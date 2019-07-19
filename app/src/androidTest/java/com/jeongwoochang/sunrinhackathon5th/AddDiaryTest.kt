@@ -29,8 +29,8 @@ class AddDiaryTest {
         val appContext = InstrumentationRegistry.getTargetContext()
         var data: ResBody? = null
         val map = HashMap<String, RequestBody>()
-        map["title"] = RequestBody.create(MediaType.parse("text/plain"), "test title")
-        map["content"] = RequestBody.create(MediaType.parse("text/plain"), "test")
+        map["title"] = RequestBody.create(MediaType.parse("text/plain"), "test title 2")
+        map["content"] = RequestBody.create(MediaType.parse("text/plain"), "test 2")
         map["photo\"; filename=\"photo.png\""] =
             RequestBody.create(MediaType.parse("image/png"), "/sdcard/DCIM/Camera/IMG_20190621_090539.jpg")
         map["emotion"] = RequestBody.create(MediaType.parse("text/plain"), "sad")

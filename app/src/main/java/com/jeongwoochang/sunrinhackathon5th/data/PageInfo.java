@@ -5,7 +5,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class PageInfo {
+import java.io.Serializable;
+
+public class PageInfo implements Serializable {
 
     @SerializedName("totalResults")
     @Expose

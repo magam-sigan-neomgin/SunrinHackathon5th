@@ -1,6 +1,7 @@
 
 package com.jeongwoochang.sunrinhackathon5th.data;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -13,7 +14,7 @@ public class DiaryRes {
     private Boolean status;
     @SerializedName("board")
     @Expose
-    private List<Board> board = null;
+    private ArrayList<Board> board = null;
 
     public Boolean getStatus() {
         return status;
@@ -23,11 +24,11 @@ public class DiaryRes {
         this.status = status;
     }
 
-    public List<Board> getBoard() {
+    public ArrayList<Board> getBoard() {
         return board;
     }
 
-    public void setBoard(List<Board> board) {
+    public void setBoard(ArrayList<Board> board) {
         this.board = board;
     }
 

@@ -1,12 +1,13 @@
 
 package com.jeongwoochang.sunrinhackathon5th.data;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Board {
+public class Board implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -38,6 +39,9 @@ public class Board {
     @SerializedName("comments")
     @Expose
     private List<Object> comments = null;
+    @SerializedName("create_time")
+    @Expose
+    private String date;
 
     public Integer getId() {
         return id;
@@ -119,9 +123,17 @@ public class Board {
         this.comments = comments;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("title", title).append("content", content).append("photo", photo).append("emotion", emotion).append("author", author).append("isShared", isShared).append("likes", likes).append("suggest", suggest).append("comments", comments).toString();
+        return new ToStringBuilder(this).append("id", id).append("title", title).append("content", content).append("photo", photo).append("emotion", emotion).append("author", author).append("isShared", isShared).append("likes", likes).append("suggest", suggest).append("comments", comments).append("date", date).toString();
     }
 
 }
