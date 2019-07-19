@@ -23,6 +23,8 @@ public class AddCookiesInterceptor implements Interceptor {
 
         HashSet<String> preferences = mDsp.getCookies();
 
+        Timber.d(String.valueOf(preferences.size()));
+
         for (String cookie : preferences) {
             builder.addHeader("Cookie", cookie);
             Timber.v("Adding Header: %s", cookie); // This is done so I know which headers are being added; this interceptor is used after the normal logging of OkHttp

@@ -7,7 +7,9 @@ import android.view.View
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import com.jeongwoochang.sunrinhackathon5th.MyApplication
 import com.jeongwoochang.sunrinhackathon5th.R
+import com.jeongwoochang.sunrinhackathon5th.util.SharedPreferencesHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -37,6 +39,13 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
+
+        MyApplication.getInstance().setOnVisibilityChangeListener {
+            if (it) {
+                if (!SharedPreferencesHelper(this).autoLogin)
+                    SharedPreferencesHelper(this).removeCookies()
+            }
+        }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {

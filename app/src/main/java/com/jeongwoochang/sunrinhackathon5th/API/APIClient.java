@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
     private static Retrofit retrofit = null;
-    public static String baseUrl = "http://54.180.57.73:3000"; //TODO:baseUrl
+    public static String baseUrl = "http://54.180.57.73:3000";
 
     public static Retrofit getClient(Context context) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

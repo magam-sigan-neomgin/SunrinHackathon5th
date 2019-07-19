@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
                         bitmap.run { compress(Bitmap.CompressFormat.PNG, 100, out) }
                         out!!.flush()
                         out.close()
-                    }catch (e:Exception){
+                    }catch (e: Exception){
                         e.printStackTrace()
                     }
                     currentProfileImgFile = file
@@ -75,7 +75,7 @@ class RegisterActivity : AppCompatActivity() {
                 map.put("id", RequestBody.create(MediaType.parse("text/plain"), email.text.toString().trim()))
                 map.put("pw", RequestBody.create(MediaType.parse("text/plain"), password.text.toString().trim()))
                 map.put("username", RequestBody.create(MediaType.parse("text/plain"), username.text.toString().trim()))
-                map.put("profileimage\"; filename=\"profile.png\"", RequestBody.create(MediaType.parse("image/png"), currentProfileImgFile))
+                //map.put("profileimage\"; filename=\"profile.png\"", RequestBody.create(MediaType.parse("image/png"), currentProfileImgFile))
                 service.register(
                     map
                 ).enqueue(object : Callback<ResBody> {
@@ -84,7 +84,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
 
                     override fun onResponse(call: Call<ResBody>, response: retrofit2.Response<ResBody>) {
-                        if (response.code() == 200) {
+                        if ((response.body() as ResBody).isStatus) {
                             Toast.makeText(applicationContext, "회원가입에 성공", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(applicationContext, LoginActivity::class.java))
                             finish()

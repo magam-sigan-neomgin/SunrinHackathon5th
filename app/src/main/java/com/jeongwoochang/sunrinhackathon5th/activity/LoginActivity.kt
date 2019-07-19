@@ -39,8 +39,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private var mAuthTask: UserLoginTask? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -48,18 +46,18 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         populateAutoComplete()
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                attemptLogin()
+                login()
                 return@OnEditorActionListener true
             }
             false
         })
 
-        email_sign_in_button.setOnClickListener { attemptLogin() }
+        email_sign_in_button.setOnClickListener { login() }
         email_sign_up_button.setOnClickListener { startActivity(Intent(this, RegisterActivity::class.java)) }
 
         if (SharedPreferencesHelper(this).autoLogin) {
             autoLogin.isChecked = true
-            attemptLogin()
+            login()
         }
     }
 
@@ -80,14 +78,11 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
             Snackbar.make(email, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                .setAction(android.R.string.ok
-                ) { requestPermissions(arrayOf(READ_CONTACTS),
-                    REQUEST_READ_CONTACTS
-                ) }
+                .setAction(
+                    android.R.string.ok
+                ) { requestPermissions(arrayOf(READ_CONTACTS), REQUEST_READ_CONTACTS) }
         } else {
-            requestPermissions(arrayOf(READ_CONTACTS),
-                REQUEST_READ_CONTACTS
-            )
+            requestPermissions(arrayOf(READ_CONTACTS), REQUEST_READ_CONTACTS)
         }
         return false
     }
@@ -104,74 +99,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                 populateAutoComplete()
             }
         }
-    }
-
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    private fun attemptLogin() {
-        if (mAuthTask != null) {
-            return
-        }
-
-        // Reset errors.
-        email.error = null
-        password.error = null
-
-        // Store values at the time of the login attempt.
-        val emailStr = email.text.toString()
-        val passwordStr = password.text.toString()
-
-        var cancel = false
-        var focusView: View? = null
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(passwordStr) && !isPasswordValid(passwordStr)) {
-            password.error = getString(R.string.error_invalid_password)
-            focusView = password
-            cancel = true
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(emailStr)) {
-            email.error = getString(R.string.error_field_required)
-            focusView = email
-            cancel = true
-        } else if (!isEmailValid(emailStr)) {
-            email.error = getString(R.string.error_invalid_email)
-            focusView = email
-            cancel = true
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView?.requestFocus()
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true)
-            mAuthTask = UserLoginTask(emailStr, passwordStr)
-            mAuthTask!!.execute(null as Void?)
-        }
-    }
-
-    private fun showProgress(show:Boolean){
-        loadingProgress.visibility = if (show) View.VISIBLE else View.GONE
-        if(show) loadingProgress.playAnimation() else loadingProgress.pauseAnimation()
-    }
-
-    private fun isEmailValid(email: String): Boolean {
-        //TODO: Replace this with your own logic
-        return email.contains("@")
-    }
-
-    private fun isPasswordValid(password: String): Boolean {
-        //TODO: Replace this with your own logic
-        return password.length > 4
     }
 
     override fun onCreateLoader(i: Int, bundle: Bundle?): Loader<Cursor> {
@@ -228,94 +155,47 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         val ADDRESS = 0
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) :
-        AsyncTask<Void, Void, Boolean>() {
+    private fun login() {
+        val service = APIClient.getClient(this).create(APIInterface::class.java)
+        service.login(email.text.toString(), password.text.toString()).enqueue(object : Callback<ResBody> {
+            override fun onFailure(call: Call<ResBody>, t: Throwable) {
+                t.printStackTrace()
+                Toast.makeText(this@LoginActivity, "로그인에 실패했습니다", Toast.LENGTH_SHORT).show()
+            }
 
-        override fun doInBackground(vararg params: Void): Boolean? {
-
-            try {
-                //Login
-                val service = APIClient.getClient(this@LoginActivity).create(APIInterface::class.java)
-                service.login(mEmail, mPassword).enqueue(object : Callback<ResBody> {
+            override fun onResponse(call: Call<ResBody>, response: Response<ResBody>) {
+                Timber.tag("OkHttp").d(response.body().toString())
+                Timber.tag("OkHttp").d(response.code().toString())
+                service.status().enqueue(object : Callback<ResBody> {
                     override fun onFailure(call: Call<ResBody>, t: Throwable) {
                         t.printStackTrace()
                         Toast.makeText(this@LoginActivity, "로그인에 실패했습니다", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onResponse(call: Call<ResBody>, response: Response<ResBody>) {
-                        Timber.d(response.body().toString())
-                        Timber.d(response.code().toString())
-                        service.status().enqueue(object : Callback<ResBody> {
-                            override fun onFailure(call: Call<ResBody>, t: Throwable) {
-                                t.printStackTrace()
-                                Toast.makeText(this@LoginActivity, "로그인에 실패했습니다", Toast.LENGTH_SHORT).show()
+                        Timber.tag("OkHttp").d(response.body().toString())
+                        Timber.tag("OkHttp").d(response.code().toString())
+                        if (response.body()!!.isStatus) {
+                            val prf = SharedPreferencesHelper(this@LoginActivity)
+                            if (autoLogin.isChecked) {
+                                prf.autoLogin = true
                             }
-
-                            override fun onResponse(call: Call<ResBody>, response: Response<ResBody>) {
-                                Timber.tag("OkHttp").d(response.body().toString())
-                                Timber.tag("OkHttp").d(response.code().toString())
-                                if (response.body()!!.isStatus) {
-                                    val prf = SharedPreferencesHelper(this@LoginActivity)
-                                    if (autoLogin.isChecked) {
-                                        prf.autoLogin = true
-                                    }
-                                    startActivity(Intent(applicationContext, MainActivity::class.java))
-                                    finish()
-                                } else {
-                                    Toast.makeText(this@LoginActivity, "로그인에 실패했습니다", Toast.LENGTH_SHORT).show()
-                                }
-                            }
-
-                        })
+                            startActivity(Intent(applicationContext, MainActivity::class.java))
+                            finish()
+                        } else {
+                            Toast.makeText(this@LoginActivity, "로그인에 실패했습니다", Toast.LENGTH_SHORT).show()
+                        }
                     }
+
                 })
-            } catch (e: InterruptedException) {
-                return false
             }
-
-            return DUMMY_CREDENTIALS
-                .map { it.split(":") }
-                .firstOrNull { it[0] == mEmail }
-                ?.let {
-                    // Account exists, return true if the password matches.
-                    it[1] == mPassword
-                }
-                ?: true
-        }
-
-        override fun onPostExecute(success: Boolean?) {
-            mAuthTask = null
-            showProgress(false)
-
-            if (success!!) {
-                finish()
-            } else {
-                password.error = getString(R.string.error_incorrect_password)
-                password.requestFocus()
-            }
-        }
-
-        override fun onCancelled() {
-            mAuthTask = null
-            showProgress(false)
-        }
+        })
     }
 
     companion object {
-
         /**
          * Id to identity READ_CONTACTS permission request.
          */
         private val REQUEST_READ_CONTACTS = 0
-
-        /**
-         * A dummy authentication store containing known user names and passwords.
-         * TODO: remove after connecting to a real authentication system.
-         */
-        private val DUMMY_CREDENTIALS = arrayOf("foo@example.com:hello", "bar@example.com:world")
     }
 }
