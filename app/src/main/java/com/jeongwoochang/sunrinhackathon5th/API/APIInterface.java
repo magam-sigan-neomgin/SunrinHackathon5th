@@ -21,6 +21,9 @@ public interface APIInterface {
     Call<ResBody> status();
 
     @GET("/board/my")
+    Call<DiaryRes> getMyBoard();
+
+    @GET("/board")
     Call<DiaryRes> getBoard();
 
     @Multipart

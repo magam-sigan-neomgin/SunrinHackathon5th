@@ -7,11 +7,18 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
+import com.jeongwoochang.sunrinhackathon5th.API.APIClient;
+import com.jeongwoochang.sunrinhackathon5th.API.APIInterface;
 import com.jeongwoochang.sunrinhackathon5th.MyApplication;
 import com.jeongwoochang.sunrinhackathon5th.R;
+import com.jeongwoochang.sunrinhackathon5th.data.DiaryRes;
 import com.jeongwoochang.sunrinhackathon5th.util.SharedPreferencesHelper;
 import net.danlew.android.joda.JodaTimeAndroid;
 import org.joda.time.DateTime;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +37,22 @@ public class MainActivity extends AppCompatActivity {
                     if (!new SharedPreferencesHelper(MainActivity.this).getAutoLogin())
                         new SharedPreferencesHelper(MainActivity.this).removeCookies();
                 }
+            }
+        });
+
+        APIInterface service = APIClient.getClient(this).create(APIInterface.class);
+        service.getMyBoard().enqueue(new Callback<DiaryRes>() {
+            @Override
+            public void onResponse(Call<DiaryRes> call, Response<DiaryRes> response) {
+                if (response.code() == 200) {
+                    DiaryRes board = response.body();
+                    Timber.d(board.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DiaryRes> call, Throwable t) {
+
             }
         });
 
