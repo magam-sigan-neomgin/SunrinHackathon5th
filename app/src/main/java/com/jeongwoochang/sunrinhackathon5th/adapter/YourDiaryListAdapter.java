@@ -8,13 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.jeongwoochang.sunrinhackathon5th.R;
-import com.jeongwoochang.sunrinhackathon5th.data.Diary;
+import com.jeongwoochang.sunrinhackathon5th.data.Board;
 
 import java.util.ArrayList;
 
 public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdapter.YourDiaryHolder> {
 
-    private ArrayList<Diary> items;
+    private ArrayList<Board> items;
     private OnItemClickListener onItemClickListener;
     private OnLikeButtonClickListener onLikeButtonClickListener;
     private OnCommentButtonClickListener onCommentButtonClickListener;
@@ -28,7 +28,7 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
 
     @Override
     public void onBindViewHolder(@NonNull YourDiaryHolder holder, int position) {
-        final Diary item = items.get(position);
+        final Board item = items.get(position);
         holder.title.setText(item.getTitle());
         holder.date.setText(item.getDate());
         holder.content.setText(item.getContent());
@@ -79,11 +79,11 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
         }
     }
 
-    public ArrayList<Diary> getItems() {
+    public ArrayList<Board> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<Diary> items) {
+    public void setItems(ArrayList<Board> items) {
         this.items = items;
     }
 
@@ -116,10 +116,10 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
     }
 
     public interface OnLikeButtonClickListener {
-        void onLickClick(Diary diaryToShare);
+        void onLickClick(Board diaryToShare);
     }
 
     public interface OnCommentButtonClickListener{
-        void onCommentClick(Diary diaryToComment);
+        void onCommentClick(Board diaryToComment);
     }
 }
