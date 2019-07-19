@@ -68,8 +68,8 @@ public class YourDiaryListAdapter extends RecyclerView.Adapter<YourDiaryListAdap
             title = itemView.findViewById(R.id.yourTitle);
             date = itemView.findViewById(R.id.yourDate);
             content = itemView.findViewById(R.id.yourContent);
-            like = itemView.findViewById(R.id.yourLike);
-            comment = itemView.findViewById(R.id.yourComment);
+//            like = itemView.findViewById(R.id.yourLike);
+//            comment = itemView.findViewById(R.id.yourComment);
         }
 
         @Override

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="emotion">
+        <item>행복해요</item>
+        <item>그냥 그래요</item>
+        <item>슬퍼요</item>
+    </string-array>
+</resources>
