@@ -26,7 +26,7 @@
     <!--Main-->
     <string name="main_profile_hi">오늘 하루는 어땠나요?</string>
     <string name="main_diary_write_title">당신의 하루를 기록해주세요</string>
-    <string name="main_diary_write_sub">지금 기록하러 가기 ></string>
+    <string name="main_diary_write_sub">&lt; 지금 기록하러 가기</string>
     <string name="main_diary_my_title">내 기록을 되돌아 볼까요?</string>
     <string name="main_diary_my_sub">기록 보러 가기 ></string>
     <string name="main_diary_your_title">다른 사람들의 기록이 궁금해요</string>

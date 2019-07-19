@@ -1,92 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:padding="20dp"
-		android:orientation="vertical">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:background="@drawable/my_diary_background">
 
-	<TextView
-			android:id="@+id/yourTitle"
-			android:layout_width="match_parent" android:layout_height="wrap_content"
-			android:text="Title"
-			android:fontFamily="@font/nanum_square_eb"
-			android:textSize="35sp"/>
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:minHeight="80dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="6dp"
+            android:layout_gravity="center_horizontal"
+            android:foreground="?attr/selectableItemBackground">
 
-	<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal">
+        <TextView
+                android:id="@+id/yourTitle"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/nanum_square_eb"
+                android:textColor="@color/colorPrimaryGreen"
+                android:gravity="center_vertical"
+                android:text="제목"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="20sp"/>
 
-		<TextView
-				android:id="@+id/yourDate"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="2019년 07월 19일 22:44"
-				android:textSize="18sp"
-				android:fontFamily="@font/nanum_square_b"/>
+    </androidx.cardview.widget.CardView>
 
-		<View android:layout_width="wrap_content" android:layout_height="0dp"
-			  android:layout_weight="1"/>
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_margin="10dp"
+            android:minHeight="80dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="6dp"
+            android:layout_gravity="center_horizontal"
+            android:foreground="?attr/selectableItemBackground">
 
-	</LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:padding="15dp">
 
-	<TextView
-			android:id="@+id/yourContent"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="아이고 ㅋㅋㅋㅋ"
-			android:fontFamily="@font/nanum_square_r"
-			android:textSize="18sp"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="horizontal">
 
-	<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:padding="20dp"
-			android:orientation="horizontal">
+                <TextView
+                        android:id="@+id/yourDate"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="2019년 07월 20일 02:46"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/nanum_square_b"/>
 
-		<ImageView
-				android:id="@+id/yourMusicAlbum"
-				android:layout_width="110dp"
-				android:layout_height="110dp"
-				android:layout_marginRight="20dp"
-				android:src="@drawable/ic_default_profile"/>
+                <View android:layout_width="wrap_content" android:layout_height="match_parent"
+                      android:layout_weight="1"/>
 
-		<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:orientation="vertical">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="작성자 | "
+                        android:fontFamily="@font/nanum_square_eb"
+                        android:textColor="@color/colorPrimaryGreen"/>
 
-			<TextView
-					android:id="@+id/yourMusicTitle"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="노래방에서"
-					android:fontFamily="@font/nanum_square_b"
-					android:textSize="25sp"/>
+                <TextView
+                        android:id="@+id/yourWriter"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="임성우"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/nanum_square_b"
+                        android:textColor="@color/colorPrimaryGreen"/>
 
-			<TextView
-					android:id="@+id/yourMusicSinger"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="5dp"
-					android:text="장범준"
-					android:fontFamily="@font/nanum_square_r"
-					android:textSize="18dp"/>
+            </LinearLayout>
 
-			<View android:layout_width="match_parent" android:layout_height="wrap_content"
-				  android:layout_weight="1" />
+            <TextView
+                    android:id="@+id/myContent"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="A i go\nHahAha\n개힘듦"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:lineSpacingMultiplier="1.2"/>
 
-			<Button
-					android:id="@+id/myMusicButton"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="right"
-					android:text="노래 듣기"/>
+            <View android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:layout_weight="1"/>
 
-		</LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="horizontal">
 
-	</LinearLayout>
+                <View android:layout_width="wrap_content" android:layout_height="match_parent"
+                      android:layout_weight="1"/>
+
+                <LinearLayout
+                        android:id="@+id/your_like"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp"
+                               android:src="@drawable/ic_like"/>
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:layout_marginLeft="10dp"
+                              android:layout_gravity="center_vertical"
+                              android:text="좋아요 | "
+                              android:fontFamily="@font/nanum_square_eb"
+                              android:textColor="@color/colorPrimaryGreen"
+                              android:textSize="18sp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="120"
+                            android:fontFamily="@font/nanum_square_b"
+                            android:textColor="@color/colorPrimaryGreen"
+                            android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/your_comment"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp">
+
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp"
+                               android:src="@drawable/ic_comment"/>
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:layout_marginLeft="10dp"
+                              android:layout_gravity="center_vertical"
+                              android:text="댓글"
+                              android:fontFamily="@font/nanum_square_eb"
+                              android:textColor="@color/colorPrimaryYellow"
+                              android:textSize="18sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:minHeight="80dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="6dp"
+            android:layout_gravity="center_horizontal"
+            android:foreground="?attr/selectableItemBackground">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="20dp"
+                android:orientation="vertical">
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:text="추천 받은 음악"
+                      android:fontFamily="@font/nanum_square_eb"
+                      android:textSize="18sp"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                          android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/yourMusicAlbum"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:src="@drawable/ic_launcher_background"
+                        android:layout_gravity="center"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:orientation="vertical">
+
+                    <TextView
+                            android:id="@+id/yourMusicTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="노래방에서"
+                            android:fontFamily="@font/nanum_square_b"
+                            android:textSize="25sp"/>
+
+                    <TextView
+                            android:id="@+id/yourMusicSinger"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="장범준"
+                            android:fontFamily="@font/nanum_square_r"
+                            android:textSize="18dp"/>
+
+                    <View android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:layout_weight="1"/>
+
+                    <ImageView
+                            android:id="@+id/yourMusicPlay"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="right"
+                            android:src="@drawable/ic_play"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
