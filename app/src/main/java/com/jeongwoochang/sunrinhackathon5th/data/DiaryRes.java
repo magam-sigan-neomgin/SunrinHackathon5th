@@ -11,9 +11,9 @@ public class DiaryRes {
     @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("diary")
+    @SerializedName("board")
     @Expose
-    private List<Diary> diary = null;
+    private List<Board> board = null;
 
     public Boolean getStatus() {
         return status;
@@ -23,17 +23,17 @@ public class DiaryRes {
         this.status = status;
     }
 
-    public List<Diary> getDiary() {
-        return diary;
+    public List<Board> getBoard() {
+        return board;
     }
 
-    public void setDiary(List<Diary> diary) {
-        this.diary = diary;
+    public void setBoard(List<Board> board) {
+        this.board = board;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("status", status).append("diary", diary).toString();
+        return new ToStringBuilder(this).append("status", status).append("board", board).toString();
     }
 
 }

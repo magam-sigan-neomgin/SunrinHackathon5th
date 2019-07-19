@@ -61,7 +61,7 @@ class AddDiaryTest {
 
                                     override fun onResponse(call: Call<DiaryRes>, response: Response<DiaryRes>) {
                                         if (response.code() == 200 && (response.body() as DiaryRes).status) {
-                                            service.setBoardShare(BoardIDReq((response.body() as DiaryRes).diary.last().id))
+                                            service.setBoardShare(BoardIDReq((response.body() as DiaryRes).board.last().id))
                                                 .enqueue(
                                                     object : Callback<ResBody> {
                                                         override fun onFailure(call: Call<ResBody>, t: Throwable) {

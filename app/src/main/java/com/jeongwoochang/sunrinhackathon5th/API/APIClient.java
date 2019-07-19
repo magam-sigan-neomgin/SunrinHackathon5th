@@ -19,11 +19,19 @@ public class APIClient {
         //.addNetworkInterceptor(new StethoInterceptor())
 
         retrofit = new Retrofit.Builder()
+                .client(GetClient())
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
 
         return retrofit;
+    }
+
+    public static OkHttpClient GetClient(){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        return  httpClient.addInterceptor(logging).build();
     }
 }
