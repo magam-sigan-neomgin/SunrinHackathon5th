@@ -9,7 +9,6 @@ import retrofit2.http.*;
 import java.util.HashMap;
 
 public interface APIInterface {
-
     @POST("/register")
     Call<ResBody> register(@Body User registerParm); //@PartMap HashMap<String, RequestBody> registerParm
 
